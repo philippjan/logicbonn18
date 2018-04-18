@@ -1,0 +1,163 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb,amsfonts,amsthm,mathtools,sansmath}
+\usepackage{cleveref}
+
+%Umgebungen
+\newtheorem{thm}{Theorem}[section] 
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\theoremstyle{plain}
+\newtheorem{cor}[thm]{Korollar}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{propo}[thm]{Proposition}
+\newtheorem{axiom}[thm]{Axiom}
+\theoremstyle{remark}
+\newtheorem{remark}[thm]{Remark}
+\newtheorem{example}[thm]{Example}
+%Aufgaben-Command
+\newcommand{\aufgabe}[1]{
+  {
+  \vspace*{0.5cm}
+  \textsf{\textbf{Aufgabe #1}}
+  \vspace*{0.2cm}
+  
+  }
+}
+%unteraufgabe
+\newcommand{\unteraufgabe}[1]{
+  {
+  \vspace*{0.2cm}
+	\noindent\textsf{(#1)}
+  }
+}
+%Teilaufgabe
+\newcommand{\teilaufgabe}[1]{
+  {
+	\noindent 
+  \vspace*{0.2cm}
+  \hspace*{0,1 cm}
+  \textsf{#1)}
+  }
+}
+
+\newcommand{\induktionsanfang}{
+  {
+  \vspace*{0.1cm}
+  \noindent
+  \textsf{Induktionsanfang:}
+  }
+}
+
+\newcommand{\induktionsschritt}{
+  {
+  \vspace*{0.1cm}
+  \noindent
+  \textsf{Induktionsschritt:}
+  }
+}
+\title{Aufgabenblatt 1}
+\author{Philipp Stassen}
+\begin{document}
+\maketitle
+\aufgabe1
+\unteraufgabe 1
+
+\teilaufgabe a
+\textit{Existenz von Inversen bezüglich der Multiplikation}:
+\begin{align}
+	\forall v \exists v' (v\cdot v'\equiv \mathsf{e}) \wedge (v'\cdot v\equiv \mathsf{e})
+\end{align}
+oder alternativ in der nicht-erweiterten Sprache:
+\begin{align}
+	\forall v \neg(\forall v' \neg\neg\left(\neg(v\cdot v'\equiv \mathsf{e}) \rightarrow \neg(v'\cdot v \equiv\mathsf{e}) \rightarrow \neg(v\cdot v'\equiv \mathsf{e} )\right))
+\end{align}
+
+\teilaufgabe b
+\textit{Kommutativität der Addition}
+\begin{align}
+	\forall v_1 (\forall (v_2 v_1+v_2\equiv v_2+v_1))
+\end{align}
+Dieser kommt ohne den erweiterten Zeichensatz aus.
+
+\teilaufgabe c
+Die \textit{Distributivität} kann wie folgt ausgedrückt werden:
+\begin{align}
+	\forall v_1(\forall v_2(\forall v_3(v_1\cdot (v_2+v_3)\equiv v_1\cdot v_2+v_1\cdot v_3)))
+\end{align}
+Sie ist ebenfalls bereits im nicht erweiterten Zeichensatz ausgedrückt.
+
+\unteraufgabe 2
+
+Der Beweis erfolgt durch Induktions über die Struktur der Terme $t\in T^{S_{arith}}$.\smallskip
+
+\noindent\emph{Induktionsanfang}: Sei $t=v_n$ eine beliebig Variable, dann ist die Anzahl der Symbole ungerade. \smallskip
+
+\noindent\emph{Induktionsschritt}: Nun müssen wir für prüfen, dass Terme, die aus der Verknüpfung von Termen mit ungerader Symbolanzahl durch ein Funktionensymbol entstehen, sich ebenfalls durch eine ungerade Symbolanzahl auszeichnen. Dies prüfen wir für jedes Funktionsymbol.
+
+\emph{für +}: das Funktionsymbol $+$ benötigt zwei Argumente $t_1$ und $t_2$. Nach \emph{Induktionsannahme} sind $t_1$ und $t_2$ Terme mit ungerader Symbolanzahl. Deshalb ist die Anzahl der Symbole von $+(t_1,t_2)$ ebenfalls ungerade.
+
+\emph{für "'$\cdot$"'}: "'$\cdot$"' ist ebenfalls ein Funktionsymbol, das zwei Argumente bekommt. Deshalb ist die Argumentation wie für $+$.
+
+\emph{für 0 bzw. 1}: Die beiden Konstanten $0$ und $1$ sind Terme, die aus einem Symbol bestehen. \qed
+
+\aufgabe2
+Es seien $w_1$, $w_2$ und $w_3$ beliebige Wörter aus $S*$. Wir wollen zeigen, dass 
+$(w_1^{\smallfrown}w_2)^{\smallfrown}w_3=w_1^{\smallfrown}(w_2^{\smallfrown}w_3)$.
+\begin{proof}
+	Es seien $w_1=s_1,...,s_n$, $w_2=s'_{1},...,s'_m$ und $w_3=s''_{1},...,s''_l$.
+	Jetzt ist nach der Definition 4 (Wort-Konkatenation)
+	\begin{align}
+		(w_1^{\smallfrown}w_2)^{\smallfrown}w_3&=(s_1,..,s_n,s'_{1},...,s'_m)^{\smallfrown}w_3\\
+						       &= s_1,...,s_n,s'_{1},...,s'_m,s''_{1},...,s''_l \\
+						       &=(s_1,...,s_n)^{\smallfrown}(w_2^{\smallfrown}w_3)\\
+						       &=w_1^{\smallfrown}(w_2^{\smallfrown}w_3)
+	\end{align}
+\end{proof}
+\aufgabe3
+\unteraufgabe1
+Es sei $t\in T^S$ wir folgern, dass $t\in \mathsf{Var}$ oder $t=ft_0...t_n$ mittels Induktion über die Struktur der Wörter. \smallskip
+\begin{proof}
+\induktionsanfang ist $t$ eine Variable, dann ist nichts zu zeigen. \smallskip
+
+\induktionsschritt Sei nun $t\in T^S$ ein n-stelliger Term. Angenommen $t$ ist nicht in der Form $ft_0...t_{n-1}$, dann ist $T'= T\backslash \{t\}$ eine kleinere Term Unterklasse nach Definition 5. Das widerspricht der Minimalität von $T^S$.
+\end{proof}
+Wenn wir nun eine Termfolge $t_0...t_{n-1}$ haben, müssen wir sicherstellen, dass es nur eine sinnvolle Lesart gibt. Wir zeigen deshalb per Induktion über die Struktur der Terme für $t\in T^S$: 
+\begin{lem}[A]\label{lemmaA}
+	Für beliebige Wörter $s_0..s_{n-1}$ ist der Ausdruck $ts_0..s_{n-1}$ kein Term. 
+\end{lem}
+\begin{proof}
+\induktionsanfang Falls $t$ eine Variable ist, dann ist $ts_0...s_{n-1}$ kein Term. Andernfalls würde dies der Minimalität der Termklasse $T^S$ widersprechen.
+
+\induktionsschritt Es seien die Terme $t_0,...,t_{n-1}$ so wie in (A), $s_0...s_{n-1}$ ein beliebiges Wort und $f\in S$ eine n-stellige Funktion. 
+Dann ist $t=ft_0...t_{n-1}$ ein Term, aber das Wort $ft_0...t_{n-1}s_0...s_{n-1}$ nicht. Letzteres würde nämlich abermals der Minimalität der Termklasse $T^S$ widersprechen.
+\end{proof}
+Aus \cref{lemmaA} folgt, dass jeder Term aus einem eindeutigen Funktionssymbol $f$ und einer eindeutigen Sequenz $t_0...t_{n-1}$ besteht.
+
+\unteraufgabe2
+Für jede Formel $\varphi\in L^S$ gilt eine der folgenden Aussagen:
+\begin{enumerate}
+	\item $\varphi=Rt_0...t_{n-1}$ für eindeutige Terme $t_0,...,t_{n-1}\in T^S$ und eine eindeutige n-stellige Relation $R\in S$.
+	\item $\varphi=\neg\psi$ mit einer eindeutigen Formel $\psi\in L^S$
+	\item $\varphi=\psi_1\to\psi_2$ mit einer eindeutigen Formel $\psi_1,\psi_2\in L^S$.
+	\item $\varphi=\forall x \,\psi$ mit $x\in Var$ und einer eindeutigen Formel $\psi\in L^S$.
+\end{enumerate}
+\begin{proof}
+	Ähnlich wie für die Terme beweisen wir zuerst die Aussage ohne Eindeutigkeit durch ein einfaches Widerspruchsargument. Ein $\phi\in L^S$, auf das keine der Aussagen 1. - 4. zutrifft, widerspricht der Minimalität von $L^S$.
+	Die Eindeutigkeit folgt nun per Induktion über die Struktur der Wörter.
+
+	\induktionsanfang Für eine Formel $Rt_0...t_{n-1}$ mit einer n-stelligen Relation $R\in S$ und Termen $t_0,...,t_{n-1}$ folgt die Eindeutigkeit aus der Eindeutigkeit der Sequenz $t_0...t_{n-1}$ (siehe \cref{lemmaA}).
+	
+	\induktionsschritt Nun müssen wir für jede der Verknüpfungen $\neg, \to, \forall$ zeigen, dass Sie die Eindeutigkeit erhalten. Dafür nehmen wir an, dass $\psi, \psi_1,\psi_2$ eindeutig bestimmt sind.\smallskip
+	
+	Für $\neg$: Ist $\neg \varphi$ nicht eindeutig bestimmt, so ist bereits $\varphi$ nicht eindeutig bestimmt. Das steht im Widerspruch zu unserer Annahme. \smallskip
+
+	Für $\to$: Ist $\psi_1\to\psi_2$ nicht eindeutig bestimmt, so sind auch $\psi_1$ bzw. $\psi_2$ nicht eindeutig bestimmt. Dies widerspricht der Annahme. \smallskip
+
+	Für $\forall$: Ist $\forall x \,\psi$ nicht eindeutig bestimmt, so ist auch auch $\psi$ nicht eindeutig bestimmt.
+\end{proof}
+\end{document}
+
