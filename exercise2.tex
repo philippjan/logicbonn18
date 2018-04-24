@@ -1,0 +1,96 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb,amsfonts,amsthm,mathtools,sansmath}
+\usepackage{cleveref}
+
+%Commands
+\newcommand{\model}{\mathfrak{M}}
+
+%Umgebungen
+\newtheorem{thm}{Theorem}[section] 
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\theoremstyle{plain}
+\newtheorem{cor}[thm]{Korollar}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{propo}[thm]{Proposition}
+\newtheorem{axiom}[thm]{Axiom}
+\theoremstyle{remark}
+\newtheorem{remark}[thm]{Remark}
+\newtheorem{example}[thm]{Example}
+%Aufgaben-Command
+\newcommand{\aufgabe}[1]{
+	{
+		\vspace*{0.5cm}
+		\textsf{\textbf{Aufgabe #1}}
+		\vspace*{0.2cm}
+
+	}
+}
+%unteraufgabe
+\newcommand{\unteraufgabe}[1]{
+	{
+		\vspace*{0.2cm}
+\noindent\textsf{(#1)}
+}
+}
+%Teilaufgabe
+\newcommand{\teilaufgabe}[1]{
+	{
+\noindent 
+\vspace*{0.2cm}
+\hspace*{0,1 cm}
+\textsf{(#1)}
+}
+}
+
+\newcommand{\induktionsanfang}{
+	{
+		\vspace*{0.1cm}
+		\noindent
+		\textsf{Induktionsanfang:}
+	}
+}
+
+\newcommand{\induktionsschritt}{
+	{
+		\vspace*{0.1cm}
+		\noindent
+		\textsf{Induktionsschritt:}
+	}
+}
+
+\title{Aufgabenblatt 2}
+\author{Philipp Stassen, Felix Jäger, Lisa Krebber}
+\begin{document}
+\maketitle
+\aufgabe6
+\unteraufgabe{1}
+
+\teilaufgabe{a} Es sei $\Phi\vDash \varphi$ und $\Phi\vDash\psi$ und $\mathfrak{M}$ ein beliebiges Modell, sodass $\model \vDash \Phi$. Dann ist ebenfalls $\model \vDash \varphi \wedge \psi$, wie man der Wahrheitstabelle für $\wedge$ entnehmen kann. Da $\model$ beliebig war, gilt die Aussage für alle Modelle von $\Phi$. Demnach folgt $\Phi\vDash \varphi\wedge \psi$.
+
+\emph{Alternativer Beweis} Wenn $\Phi\vDash\varphi$ und $\Phi\vDash\psi$, dann gilt $\Phi\nvDash \neg\psi$. Demnach gilt auch $\Phi\nvDash\varphi\to\neg\psi$, also $\Phi\vDash\neg(\varphi\to\neg\psi)$. Da wir $\neg(\varphi\to\neg\psi):=\varphi\wedge\psi$ definiert haben, folgt die Behauptung.\qed
+
+\teilaufgabe{b} Die Argumente aus \textsf{(a)} lassen sich einfach umkehren. Ich zeige dies nur für den ersten Beweis.
+
+Es sei $\Phi\vDash\varphi\wedge\psi$ und $\model$ ein beliebiges Modell, sodass $\model\vDash\Phi$. Dann gilt auch $\model\vDash \varphi$ und $\model\vDash \psi$, wie man der Wahrheitstabelle für $\wedge$ entnehmen kann. Da $\model$ beliebig war, gilt dies für alle Modelle von $\Phi$. Daraus folgt $\Phi\vDash \varphi$ und $\Phi\vDash\psi$.\qed
+
+\teilaufgabe{c} Es sei $\Phi\vDash\varphi$, $\psi\in L^S$ eine beliebige Formel und $\model$ ein Modell, sodass $\model\vDash\Phi$. Dann ist $\model\vDash \varphi$, und anhand der Wahrheitstabelle für $\vee$ ist sowohl $\model\vDash\varphi\vee\psi$ als auch $\model\vDash\psi\vee\varphi$. Da das Modell beliebig war, folgt $\Phi\vDash\varphi\vee\psi$ bzw. $\Phi\vDash\psi\vee\varphi$.\qed
+
+\teilaufgabe{d} Es seien $\Phi\vDash\varphi\vee\psi$, $\Phi\vDash\neg\psi$ und $\model$ ein Modell, sodass $\model\vDash\Phi$. Demnach ist $\model\vDash\varphi\vee\psi$ und $\model\vDash\neg\psi$. Man kann der Wahrheitstabelle für $\vee$ entnehmen, dass $\model\vDash\varphi$ gelten muss. Da das Modell $\model$ beliebig war, folgt $\Phi\vDash\varphi$ \qed
+
+\unteraufgabe2
+Sei $S_{Gr}=(e,\circ)$ die Sprache der Gruppen, $\Phi$ sei leer, und
+\begin{align}
+	\varphi=\forall v_1\forall v_2 v_1\circ v_2\equiv v_2\circ v_1& \textrm{ sowie}\\
+	\psi=\neg\varphi&.
+\end{align}
+Da $\varphi\vee\neg\varphi$ eine Tautologie ist, gilt $\vDash \varphi\vee\psi$.
+
+Allerdings ist $(\mathbb{N},+)$ ein Modell einer abelsche Gruppe und $(\mathrm{GL}_n(\mathbb{R}),\cdot)$, die Gruppe der invertierbaren $(n\times n)$-Matrizen, ein Modell einer nicht abelschen Gruppe. Deshalb gelten $\nvDash \phi$ und $\nvDash \psi$. \smallskip
+
+Ein bekannteres Beispiel ist die Wahl von $S=(\in)$, $\Phi$ ist das ZFC Axiomsystem gemeinsam mit der Annahme, dass es konsistent ist. $\phi$ ist die Kontinuumshypothese und $\psi$ die Negation derselben. Auch hier ist $\phi\vee\psi$ eine Tautologie, aber sowohl $\phi$ als auch $\psi$ gelten nicht für alle Modelle.
+\end{document}
