@@ -1,0 +1,117 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb,amsfonts,amsthm,mathtools,sansmath}
+\usepackage{cleveref}
+
+%Commands
+\newcommand{\model}{\mathfrak{M}}
+\newcommand{\claim}{\textsf{Behauptung}:\hspace{0,2cm}}
+\makeatletter
+\def\fall#1{\forall #1\@ifnextchar\bgroup{\,\fall}{:\,}}
+\def\exis#1{\exists #1\@ifnextchar\bgroup{\,\exis}{:\,}}
+\makeatother
+
+%Umgebungen
+\newtheorem{thm}{Theorem}[section] 
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\theoremstyle{plain}
+\newtheorem{cor}[thm]{Korollar}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{propo}[thm]{Proposition}
+\newtheorem{axiom}[thm]{Axiom}
+\theoremstyle{remark}
+\newtheorem{remark}[thm]{Remark}
+\newtheorem{example}[thm]{Example}
+
+%Aufgaben-Command
+\newcommand{\aufgabe}[1]{
+	{
+		\vspace*{0.5cm}
+		\textsf{\textbf{Aufgabe #1}}
+		\vspace*{0.2cm}
+
+	}
+}
+%unteraufgabe
+\newcommand{\unteraufgabe}[1]{
+	{
+		\vspace*{0.2cm}
+\noindent\textsf{(#1)}
+}
+}
+%Teilaufgabe
+\newcommand{\teilaufgabe}[1]{
+	{
+\noindent 
+\vspace*{0.2cm}
+\hspace*{0,1 cm}
+\textsf{#1)}
+}
+}
+
+\newcommand{\induktionsanfang}{
+	{
+		\vspace*{0.1cm}
+		\noindent
+		\textsf{Induktionsanfang:}
+	}
+}
+
+\newcommand{\induktionsschritt}{
+	{
+		\vspace*{0.1cm}
+		\noindent
+		\textsf{Induktionsschritt:}
+	}
+}
+
+\title{Serie 5}
+\author{Philipp Stassen, Felix Jäger, Lisa Krebber}
+\begin{document}
+\maketitle
+\aufgabe{15}
+\unteraufgabe{1} Sei $S$ eine Sprache und $\Phi$ eine Menge von $S$-Sätzen, die endliche Modelle besitzt. \claim Die Klasse aller $S$-Strukturen $\mathfrak{A}$ mit $\mathfrak{A}\vDash\Phi$ ist genau dann axiomatisierbar, wenn eine $N\in \mathbb{N}$ existiert, sodass die Trägermenge jeder $S$-Struktur $\mathfrak{A}$ mit $\mathfrak{A}\vDash \Phi$ höchstens $N$ Elemente enthält.
+\begin{proof}
+	''$\Longleftarrow$'' Man fügt $\Phi$ einen Satz hinzu, der ausdrückt, dass es höchstens $N$ verschiedene Variablen gibt. Es lässt sich formulieren, dass es nur $n$ verschiedene Variablen gibt:
+	\begin{align}
+		\exis{v_1}{v_2...}{v_n}&\bigwedge_{\substack{i=1,j=1 \\ i< j}}^n\neg(v_i\equiv v_j) \\
+		\fall{x} &\bigvee_{i=1}^n x\equiv v_i
+	\end{align}
+Fügt man diese Sätze für alle $n\leq N$ nun per Disjunktion zusammen, erhält man einen langen Satz, der vereint mit $\Phi$ die Modell Klasse axiomatisiert.  \smallskip
+
+''$\Longrightarrow$'' Angenommen kein solches $N$ existiert und die Klasse der Modelle, die $\Phi$ erfüllen und endlich sind, ist axiomatiersierbar durch $\Phi'$, dann gibt es zu jedem $n\in \mathbb{N}$ Modelle $\mathcal{M}_n\vDash \Phi'$ mit $|\mathcal{M}(\forall)|=n$. Aus \emph{Theorem 71} folgt nun, dass $\Phi'$ auch ein unendliches Modell besitzt. Dies widerspricht der Annahme.
+\end{proof}
+\unteraufgabe{2} Es sei $\varphi$ ein $S_{Gr}$-Satz und $\Phi_{Gr}$ die üblichen Gruppen Axiome. \claim Gilt $\varphi$ für jede unendliche Gruppe, dann existiert ein $N$, sodass $\varphi$ für jede Gruppe mit mindestens $N$ Elementen gilt.
+\begin{proof}
+	Wir definieren
+	\begin{align}
+		\Phi'=\Phi \cup \bigcup_{n\in\mathbb{N}}\{\psi_{\geq n}\} \text{ mit} \\
+		\psi_{\geq n} = \exis{v_1...}{v_n}\bigwedge_{i<j<n}\neg(v_i\equiv v_j).
+	\end{align}
+Da $\varphi$ für jede unendliche Gruppe gilt, d.h. $\mathcal{M}\vDash\varphi$ für alle $\mathcal{M}\in \mathrm{Mod}_{S_{Gr}}(\Phi')$, folgt, dass $\Phi'\vDash \varphi$. Nach dem Kompaktheitssatz existiert nun eine endliche Teilmenge $\Phi_0\subset \Phi'$, sodass $\Phi_0\vDash\varphi$. Wähle $n_0$ sodass $\Phi_0\subseteq \Phi'\cup \bigcup_{n<n_0}\{\psi_{\geq n}\}$. Nun ist jedes Modell $\mathcal{M}\in\mathrm{Mod}_{S_{Gr}}(\Phi_0)$ ein Modell von $\varphi$ und eine Gruppe mit mindestens $n_0:=N$ Elementen.
+\end{proof}
+\aufgabe{17} Es seien $\Phi$ die Körperaxiome, $K_0$ ein Körper und $S_{K_0}$ die erweiterte Sprache aus \emph{Aufgabe 16}. Wir definieren
+\begin{align}
+	\Phi_{0}:= \Phi\cup\bigcup_{n>0}\{\fall{a_1...}{a_n}\exists x\,:\sum_{i=0}^{n}a_ix^i\equiv 0\}.
+\end{align}
+Der Satz von Kronecker sagt nun, dass jede endliche Teilmenge $\Phi_0\subseteq \Phi'$ erfüllbar ist, da wir in diesem Fall ein Modell $\mathfrak{A}$ haben, sodass $K_0\hookrightarrow \mathfrak{A}$ und die (endlich vielen) Polynome dort eine Nullstelle besitzen.
+
+Nun folgt aus dem Kompaktheitssatz, dass $\Phi'$ ebenfalls erfüllbar ist. Sei $K_1$ so, dass $K_0\hookrightarrow K_1$ und $K_1\vDash \Phi'$. Wir iterieren dieses Verfahren, indem wir nun die Sprache $S_{K_{i+1}}$ und die Formelmenge
+\begin{align}
+	\Phi_{i+1}:=\Phi_{i}\cup\bigcup_{n>0}\{\fall{a_1...}{a_n}\exists x\,:\sum_{i=0}^{n}a_ix^i\equiv 0\}
+\end{align}
+(evtl. muss man die Variablen geschickter indizieren...) betrachten. 
+Daraus erhalten wir eine Kette $\langle K_n|n\in\mathbb{N}\rangle$, sodass $K_n\hookrightarrow K_{n+1}$ und $K_{n+1}\vDash \Phi_{n}$. \smallskip
+
+Wir können nun $K:=\bigcup_{n\in\mathbb{N}}K_n$ definieren. Hier ist $K_n\subset K_{n+1}$ als Teilmenge aufgefasst, indem $K_n$ mit seinem Bild unter der Einbettung $K_n\hookrightarrow K_{n+1}$ identifiziert wird. (Vielleicht könnte man auch stattdessen das Tensorprodukt der Folge betrachten und spart sich dann diese Schummelei...). $K$ ist nun ein algebraisch abgeschlossener Körper und $K_0\hookrightarrow K$.
+%Nach Konstruktion ist $\forall i\, :\, \mathrm{Mod}_{S_{K_i}}(\Phi_{i})\neq \emptyset$. 
+%\begin{align}
+%	\mathrm{Mod}_{S_{K_i}}(\Phi_{i})&\hookrightarrow\mathrm{Mod}_{S_{K_{i+1}}}(\Phi_{i+1}) \text{ mit} \\
+%	\mathfrak{A} &\mapsto \mathfrak{A}_*
+%\end{align}
+\end{document}
+
