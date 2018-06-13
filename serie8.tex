@@ -1,0 +1,96 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb,amsfonts,amsthm,mathtools,sansmath}
+\usepackage{cleveref}
+
+%Commands
+\newcommand{\model}{\mathfrak{M}}
+\newcommand{\claim}{\textsf{Behauptung}:\hspace{0,2cm}}
+\makeatletter
+\def\fall#1{\forall #1\@ifnextchar\bgroup{\,\fall}{:\,}}
+\makeatother
+
+%Umgebungen
+\newtheorem{thm}{Theorem}[section] 
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\theoremstyle{plain}
+\newtheorem{cor}[thm]{Korollar}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{propo}[thm]{Proposition}
+\newtheorem{axiom}[thm]{Axiom}
+\theoremstyle{remark}
+\newtheorem{remark}[thm]{Remark}
+\newtheorem{example}[thm]{Example}
+
+%Aufgaben-Command
+\newcommand{\aufgabe}[1]{
+	{
+		\vspace*{0.5cm}
+		\textsf{\textbf{Aufgabe #1}}
+		\vspace*{0.2cm}
+
+	}
+}
+%unteraufgabe
+\newcommand{\unteraufgabe}[1]{
+	{
+		\vspace*{0.2cm}
+\noindent\textsf{(#1)}
+}
+}
+%Teilaufgabe
+\newcommand{\teilaufgabe}[1]{
+	{
+\noindent 
+\vspace*{0.2cm}
+\hspace*{0,1 cm}
+\textsf{#1)}
+}
+}
+
+\newcommand{\induktionsanfang}{
+	{
+		\vspace*{0.1cm}
+		\noindent
+		\textsf{Induktionsanfang:}
+	}
+}
+
+\newcommand{\induktionsschritt}{
+	{
+		\vspace*{0.1cm}
+		\noindent
+		\textsf{Induktionsschritt:}
+	}
+}
+
+\title{Serie 8}
+\author{Philipp Stassen, Felix Jäger, Lisa Krebber}
+\begin{document}
+\maketitle
+\aufgabe2 Sei $S$ eine Sprache und $\Phi$ eine konsistente Menge von universellen $S$-Sätzen, in denen das symbol $\equiv$ nicht auftaucht.
+
+\claim Es gibt ein Model $\model$ von $\Phi$ mit $\model(t_1) \neq \model(t_2)$ für alle paarweise verschiedenen Terme $t_0$ und $t_1$.
+\begin{proof}
+	Wir konstruieren ein Termmodell $\mathfrak{T}^{\Phi}$ nach dem Vorbild der Vorlesung (\textit{Definition} 52). Die Relation $\sim$ sei trivial und identifiziere bloß syntaktisch identische Terme. Damit ist $T^S$ die Grundmenge von $\mathfrak{T}^{\Phi}$. Damit folgt die gewünschte Eigenschaft, dass $\mathfrak{T}^{\Phi}(t_0)\neq\mathfrak{T}^{\Phi}(t_1)$ für paarweise verschiedene Terme $t_0$ und $t_1$ direkt aus der Definition von $\mathfrak{T}^{\Phi}$. \medskip
+
+	(1) Es bleibt zu zeigen, dass $\mathfrak{T}^{\Phi}\vDash \Phi$. Wir wissen, dass $\mathfrak{T}^{\Phi}$ alle atomaren Formeln aus $\Phi$ erfüllt (Theorem 54). Um die Aussage $\mathfrak{T}^{\Phi}\vDash \Phi$ zu zeigen, müssen wir ähnlich wie bei der Konstruktion von Henkin Mengen vorgehen. Da $\Phi$ nach Annahme konsistent ist, und die Ableitungs Vollständigkeit nach \textit{Theorem} 61 ohne Komplikationen auch für diesen Fall folgt, genügt es zu zeigen, dass $\Phi$ ''Zeugen'' enthält. Wir schwächen die Aussage etwas ab, und verlangen keine Zeugen. Im Gegenzug müssen wir die Sprache nicht erweitern, da $\Phi$ diese schwächere Annahme bereits erfüllt.\medskip
+
+	(2) \claim Für $\varphi = \forall x \psi \in \Phi$ gibt es Terme $t_0,...,t_{n-1}$ sodass $\Phi \vdash \neg\varphi \to \neg(\bigwedge_{0\leq i< n}\psi\frac{t_i}{x})$.
+
+	Beweis.
+	Die Behauptung folgt aus Herbrands Theorem und dem Vollständigkeitssatz. \textit{qed}(2) \medskip
+
+	(3) Nun müssen wir um (1) zu erhalten noch zeigen, dass \emph{Lemma 56 c)} und \emph{Theorem 57} in leicht abgewandelter Form trotzdem gelten.
+	
+	\emph{Lemma 56 c)} Für alle $t_0,...,t_{n-1}\in T^S$ gilt $\Phi \vdash \bigwedge_{0\leq i <n} \psi \frac{t_i}{x}$ gdw $\Phi \vdash \forall x \,\psi$. 
+
+	Der Beweis wiederholt die Argumentation des originalen Lemmas.\medskip
+
+	\emph{Beweis Theorem 57} Lediglich Part $iv)$ des Beweises, also der Induktionsschrit zum Allquantor, muss modifiziert werden.
+\end{proof}
+\end{document}
