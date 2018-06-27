@@ -1,0 +1,129 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb,amsfonts,amsthm,mathtools,sansmath}
+\usepackage{cleveref}
+
+%Commands
+\newcommand{\model}{\mathfrak{M}}
+\newcommand{\claim}{\textsf{Behauptung}:\hspace{0,2cm}}
+\makeatletter
+\def\fall#1{\forall #1\@ifnextchar\bgroup{\,\fall}{:\,}}
+\makeatother
+
+%Umgebungen
+\newtheorem{thm}{Theorem}[section] 
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\theoremstyle{plain}
+\newtheorem{cor}[thm]{Korollar}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{propo}[thm]{Proposition}
+\newtheorem{axiom}[thm]{Axiom}
+\theoremstyle{remark}
+\newtheorem{remark}[thm]{Remark}
+\newtheorem{example}[thm]{Example}
+
+%Aufgaben-Command
+\newcommand{\aufgabe}[1]{
+	{
+		\vspace*{0.5cm}
+		\textsf{\textbf{Aufgabe #1}}
+		\vspace*{0.2cm}
+
+	}
+}
+%unteraufgabe
+\newcommand{\unteraufgabe}[1]{
+	{
+		\vspace*{0.2cm}
+\noindent\textsf{(#1)}
+}
+}
+%Teilaufgabe
+\newcommand{\teilaufgabe}[1]{
+	{
+\noindent 
+\vspace*{0.2cm}
+\hspace*{0,1 cm}
+\textsf{#1)}
+}
+}
+
+\newcommand{\induktionsanfang}{
+	{
+		\vspace*{0.1cm}
+		\noindent
+		\textsf{Induktionsanfang:}
+	}
+}
+
+\newcommand{\induktionsschritt}{
+	{
+		\vspace*{0.1cm}
+		\noindent
+		\textsf{Induktionsschritt:}
+	}
+}
+
+\title{Serie 10}
+\author{Philipp Stassen, Felix Jäger, Lisa Krebber, Antonia}
+\begin{document}
+\maketitle
+\aufgabe{30}
+\unteraufgabe{4} \claim Eine transitive Menge ist genau dann Ordinalzahl, wenn sie durch die $\in$ Relation linear geordnet wird.
+\begin{proof} 
+	Es ist offensichtlich, dass $x$ genau dann eine Ordinalzahl ist, wenn $x$ eine transitive Menge von Ordinalzahlen ist. \\
+	Damit folgt ''$\Longrightarrow$'' aus Teilaufgabe (11).
+
+	\noindent ''$\Longleftarrow$'':
+	Sei $x$ transitiv und linear geordnet. Sei $\alpha$ die minimale Ordinalzahl, sodass $\alpha\notin x$. Falls $x\subseteq \alpha$, dann ist $x$ eine Ordinalzahl (da transitive Menge von Ordinalzahlen). Also sei $x\nsubseteq \alpha$. 
+	Wähle $y\in x\backslash \alpha$, sodass $y\cap (x\backslash \alpha)\equiv \emptyset$ (Foundation). Da $x$ transitiv ist, ist $y\subseteq x$ und deshalb $y\backslash \alpha \equiv\emptyset$. Damit folgt aber, dass $y\subseteq \alpha$ und $y\in\mathrm{Ord}$. 
+	Da $\mathrm{Ord}$ linear geordnet ist, erhalten für $y$ und $\alpha$ einen Widerspruch
+	\begin{enumerate}
+		\item $y\notin \alpha$, da $y\in x\backslash\alpha$
+		\item $\alpha\notin y$, da ansonsten $\alpha\in x$
+		\item $\alpha\not\equiv y$, da ansonsten $\alpha\in x$
+	\end{enumerate}
+\end{proof}
+\unteraufgabe5 \claim Jedes $n\in \mathbb{N}$ ist Ordinalzahl. 
+\begin{proof}
+	Induktionsbeweis:
+
+	\induktionsanfang $\emptyset$ ist eine Ordinalzahl \\
+	\induktionsschritt ist $n$ eine Ordinalzahl, so ist auch $n+1$ eine Ordinalzahl. (Aufgabe 7)
+\end{proof}
+\unteraufgabe6 \claim jede nichtleere Teilmenge x von $n\in\mathbb{N}$ hat ein Maximum.
+\begin{proof}
+	Da $x\subset\mathbb{N}$, ist $\bigcup x$ eine Ordinalzahl. Da $|x|<\omega$  ist $\bigcup x \in x$. Aus Teilaufgabe (9) folgt, dass für $y\in x \rightarrow y\in \bigcup x\vee y\equiv \bigcup x$
+\end{proof}
+\unteraufgabe7 \claim Ist $\alpha$ eine Ordinalzahl, so ist auch $\alpha+1$ eine Oridinalzahl
+\begin{proof}
+	Sei $\alpha$ eine Ordinalzahl, dann ist $\alpha+1$ transitiv. (Teilaufgabe (2)). Sei $x\in \alpha+1$. Entweder ist $x\equiv \alpha$, oder $x\in \alpha$. In beiden Fällen ist $x$ transitiv, da $\alpha$ eine Ordinalzahl ist.
+\end{proof}
+\unteraufgabe{8} \claim für $x\subset\mathrm{Ord}$ ist $\bigcup x\in \mathrm{Ord}$
+\begin{proof}
+	Die Transitivität von $\bigcup x$ wissen wir aus Teilaufgabe (3). Sei $y\in \bigcup x$, existiert ein $z\in x$, sodass $y\in z$ da $z\in \mathrm{Ord}$ ist $y$ transitiv.
+\end{proof}
+\unteraufgabe9 \claim $\alpha, \beta\in \mathrm{Ord}$ mit $\alpha\subseteq\beta$, dann ist $\alpha\equiv\beta \vee \alpha\in\beta$.
+\begin{proof}
+	Angenommen $\alpha\not\equiv\beta$, dann ist $\beta\backslash\alpha\not\equiv\emptyset$. Wähle $x\in\beta\backslash\alpha$, sodass $x\cap\beta\backslash\alpha\equiv\emptyset$ (Fundierung). Da $x\in \beta$ ist $x\in \mathrm{Ord}$ können wir folgern, dass $x\notin \alpha$, da $x\in\beta\backslash\alpha$. Aber dann ist $x\equiv \alpha\vee \alpha\in x$. In beiden Fällen folgt $\alpha\in\beta$. 
+	\remark Das "Entweder ... oder" ist klar, wegen Fundierung.
+\end{proof}
+\unteraufgabe{10} Angenommen $\alpha\not\equiv \emptyset $ und $\neg (\alpha\equiv \mathrm{sup}(\alpha))$. \claim Es existiert ein $\beta\in\alpha$ mit $\alpha \equiv\beta+1$.
+\begin{proof} Da $\neg (\alpha\equiv \mathrm{sup}(\alpha))$ ist $\alpha \supsetneq\bigcup\alpha$ und nach (9) muss $\bigcup\alpha\in\alpha$ sein. Aber $\bigcup \alpha +1 \in \alpha$ ist widersprüchlich nach der Definition der Vereinigung. Also muss $\bigcup \alpha +1 = \alpha$ sein. 
+\end{proof}
+\unteraufgabe{11} $x$ und $y$ sind vergleichbar, wenn $x\in y \vee x\equiv y \vee y\in x$.
+Seien $x,y\in \mathrm{Ord}$. Wir müssen zeigen, dass beliebige $x$ und $y$ vergleichbar sind. 
+\begin{proof}
+	Seien $x,y$ Ordinalzahlen. ObdA sind $x$ und $y$ $\in$-minimal mit der Eigenschaft nicht vergleichbar zu sein (Fundierung).
+	Sei $z\in y$ beliebig, dann ist $z$ mit $x$ vergleichbar.
+	\begin{enumerate}
+	\item $z \equiv x$ oder $x\in z$, dann ist $x\in y$, Widerspruch.
+	\item also $z\in x$, da $z$ beliebig gewählt war, ist $y\subseteq x$
+	\end{enumerate}
+Mit dem selben Argument erhält man $x\subseteq y$ und damit $x \equiv y$. Das aber widerspricht der Annahme, dass $x$ und $y$ nicht vergleichbar sind.
+\end{proof}
+\end{document}
